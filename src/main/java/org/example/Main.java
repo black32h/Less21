@@ -1,17 +1,24 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main ( String[] args ) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main {
+    public static void main(String[] args) {
+        try (FileInputStream fileIn = new FileInputStream("student.ser");
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+
+            // Десеріалізація об'єкта
+            Student student = (Student) in.readObject();
+
+            // Виведення об'єкта на екран
+            System.out.println("Десеріалізований об'єкт: " + student);
+            System.out.println("Ім'я студента: " + student.getName());
+            System.out.println("Оцінка  студента: " + student.getGrade());
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,2 +1,35 @@
-package org.example;public class Student {
+package org.example;
+
+import java.io.Serializable;
+
+class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String name;
+    private int grade;
+    private transient String password; // поле не серіалізується
+
+    public Student(String name, int grade, String password) {
+        this.name = name;
+        this.grade = grade;
+        this.password = password;
+    }
+
+    // Геттери для доступу до полів
+    public String getName() {
+        return name;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    // Метод для зручного виведення об'єкта
+    @Override
+    public String toString() {
+        return "Student{name='" + name + "', grade=" + grade + ", password='" + password + "'}";
+    }
 }
